@@ -20,17 +20,14 @@ const freelancers = [
     occ: "Teacher",
     pay: 50,
   },
-  {
-    name: "Carol",
-    occ: "Programmer",
-    pay: 70,
-  },
 ];
-console.log(freelancers);
-const addWorkIntervalId = setInterval(addFreelancer, 1000);
 
-const averagePrice = document.querySelector("#averagePrice");
+const addWorkIntervalId = setInterval(addFreelancer, 6000);
+
+const averagePriceSpan = document.querySelector("span");
 const freelancertbody = document.querySelector("tbody");
+
+console.log("gello world");
 
 function render() {
   const freelancerRows = freelancers.map((freelancer) => {
@@ -42,6 +39,15 @@ function render() {
     return freelancerRow;
   });
   freelancertbody.replaceChildren(...freelancerRows);
+
+  averagePriceSpan.textContent = getAveragePrice();
+}
+
+function getAveragePrice() {
+  return (
+    freelancers.reduce((total, freelancer) => freelancer.pay + total, 0) /
+    freelancers.length
+  );
 }
 
 render();
