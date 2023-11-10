@@ -5,7 +5,7 @@ const occupations = [
   "Teacher",
   "Programmer",
   "Max-inista",
-  "Coward",
+  "Construction",
   "Astrophysicist",
 ];
 const maxFreelancers = 10;
@@ -29,17 +29,22 @@ const freelancers = [
 console.log(freelancers);
 const addWorkIntervalId = setInterval(addFreelancer, 1000);
 
-render();
+const averagePrice = document.querySelector("#averagePrice");
+const freelancertbody = document.querySelector("tbody");
 
 function render() {
-  const freelancer = document.querySelector("#people");
-  const freelancerElements = freelancers.map((freelancer) => {
-    const element = document.createElement("li");
-    element.textContent = `Name: ${freelancer.name} Occupation: ${freelancer.occ} Starting Price: ${freelancer.pay} `;
-    return element;
+  const freelancerRows = freelancers.map((freelancer) => {
+    const freelancerRow = document.createElement("tr");
+    freelancerRow.innerHTML = `
+    <td>${freelancer.name}</td>
+    <td>${freelancer.occ}</td>
+    <td>$${freelancer.pay}</td>`;
+    return freelancerRow;
   });
-  freelancer.replaceChildren(...freelancerElements);
+  freelancertbody.replaceChildren(...freelancerRows);
 }
+
+render();
 
 function addFreelancer() {
   const randName = names[Math.floor(Math.random() * names.length)];
